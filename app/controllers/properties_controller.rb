@@ -14,10 +14,12 @@ class PropertiesController < ApplicationController
   def new
     @property = Property.new
     @property.nearest_stations.build
+    @property.nearest_stations.build
   end
 
   # GET /properties/1/edit
   def edit
+    @property.nearest_stations.build
   end
 
   # POST /properties or /properties.json
@@ -37,7 +39,9 @@ class PropertiesController < ApplicationController
 
   # PATCH/PUT /properties/1 or /properties/1.json
   def update
+    
     respond_to do |format|
+      # binding.pry
       if @property.update(property_params)
         format.html { redirect_to @property, notice: "Property was successfully updated." }
         format.json { render :show, status: :ok, location: @property }
@@ -65,6 +69,6 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :money, :address, :year, :other,nearest_stations_attributes:[:line, :station_name, :walk_time])
+      params.require(:property).permit(:id, :name, :money, :address, :year, :other,nearest_stations_attributes:[:id, :line, :station_name, :walk_time])
     end
 end
