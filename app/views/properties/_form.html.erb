@@ -60,9 +60,10 @@
 
   <% end %>
 
-  <% actions = action_name%>
+  <% action_button = "更新する" if action_name == "edit"%>
+  <% action_button = "登録する" if action_name == "new"%>
 
   <div class = actions>
-    <%= form.submit %>
+    <%= form.submit "#{action_button}"%>
   </div>
 <% end %>
