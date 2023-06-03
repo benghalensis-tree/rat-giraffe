@@ -42,6 +42,7 @@ class PropertiesController < ApplicationController
     
     respond_to do |format|
       # binding.pry
+      
       if @property.update(property_params)
         format.html { redirect_to @property, notice: "Property was successfully updated." }
         format.json { render :show, status: :ok, location: @property }
