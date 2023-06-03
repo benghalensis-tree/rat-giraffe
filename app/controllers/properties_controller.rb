@@ -28,6 +28,11 @@ class PropertiesController < ApplicationController
 
     respond_to do |format|
       if @property.save
+
+        NearestStation.where("line=='' OR station_name=='' OR walk_time==''").each do |station|
+          station.destroy
+        end
+        
         format.html { redirect_to @property, notice: "Property was successfully created." }
         format.json { render :show, status: :created, location: @property }
       else
@@ -44,6 +49,9 @@ class PropertiesController < ApplicationController
       # binding.pry
       
       if @property.update(property_params)
+        NearestStation.where("line=='' OR station_name=='' OR walk_time==''").each do |station|
+          station.destroy
+        end
         format.html { redirect_to @property, notice: "Property was successfully updated." }
         format.json { render :show, status: :ok, location: @property }
       else
